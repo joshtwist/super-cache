@@ -1,0 +1,35 @@
+{
+  "policies": [
+    {
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/custom-cache)"
+      },
+      "name": "custom-cache",
+      "policyType": "custom-code-inbound"
+    },
+    {
+      "handler": {
+        "export": "OpenIdJwtInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "secret": "test"
+        }
+      },
+      "name": "jwt-auth",
+      "policyType": "open-id-jwt-auth-inbound"
+    },
+    {
+      "handler": {
+        "export": "CachingInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "cacheId": "$env(X)",
+          "expirationSecondsTtl": 600000
+        }
+      },
+      "name": "caching-inbound-2",
+      "policyType": "caching-inbound"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Zuplo API"
+  },
+  "paths": {
+    "/cache-demo": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "get": {
+        "summary": "Cache busting demo",
+        "description": "Lorem ipsum dolor sit amet, **consectetur adipiscing** elit, sed do `eiusmod tempor` incididunt ut labore et dolore magna aliqua.",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlRewriteHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "rewritePattern": "https://hit-counter-api.zuplo-exp.workers.dev/bananas-extra-random"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "jwt-auth",
+              "custom-cache"
+            ]
+          }
+        },
+        "operationId": "ee0d2b25-d9d7-4299-858a-4c2b5466c570"
+      }
+    }
+  }
+}
